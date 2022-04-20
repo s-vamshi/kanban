@@ -1,0 +1,23 @@
+body {
+    background: rgb(255, 255, 255);
+  }
+  
+  .fill {
+    cursor: pointer;
+  }
+  
+  .hold {
+    border: solid 5px #ccc;
+  }
+  
+  .empty {
+    display: inline-block;
+    margin: 10px;
+    background: white;
+  }
+  
+  .hovered {
+    background: #f4f4f4;
+    border:solid 5px blue;
+  }
+  

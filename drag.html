@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container" style="padding: 100px;">
+        <form onsubmit="return false" class="form-inline">
+            <input type="text" class="form-control mb-2 mr-sm-2" id="tk" placeholder="Enter Your Task">
+            <button type="submit" class="btn btn-primary mb-2" onclick="fun()">Submit</button>
+        </form>  
+        <div class="card-deck">
+            <div class="card bg-light text-dark empty">
+                <div class="card-title">
+                    <center>Backlog</center>    
+                </div>
+            </div>
+            <div class="card bg-light text-dark empty">
+                <div class="card-title">
+                    <center>Inprogress</center>    
+                </div>
+            </div>
+            <div class="card bg-light text-dark empty">
+                <div class="card-title">
+                    <center>Approved</center>    
+                </div>
+
+            </div>
+            <div class="card bg-light text-dark empty">
+                <div class="card-title">
+                    <center>Done</center>    
+                </div>
+            </div>
+        </div>   
+    </div>
+    <script src="kanban.js"></script>
+</body>
+</html>
