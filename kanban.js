@@ -1,83 +1,82 @@
-function fun(){
-    let tk = document.getElementById("tk").value;
-    const card = document.querySelector('.card');
-    var para = document.createElement("div");
-    para.className="card bg-primary text-white fill m-3";
-    para.setAttribute("draggable", "true");
-    var para1 = document.createElement("div");
-    para1.classList.add("card-body");
-    var node = document.createTextNode(tk);
-    var para2 = document.createElement("span");
-    para2.setAttribute("onclick", "rem(this)");
-    para2.className = " btn btn-light float-right btn-sm";
-    var node2 = document.createTextNode('X');
-    para2.appendChild(node2);
-    para1.appendChild(node);
-    para1.appendChild(para2);
-    para.appendChild(para1);
-    para.addEventListener('dragstart', dragStart);
-    para.addEventListener('dragend', dragEnd);
-    card.appendChild(para);
-
+function fun() {
+  let taskName = document.getElementById("tk").value;
+  const card = document.querySelector(".card");
+  var taskTab = document.createElement("div");
+  taskTab.className = "card bg-primary text-white fill m-3";
+  taskTab.setAttribute("draggable", "true");
+  var taskTabBody = document.createElement("div");
+  taskTabBody.classList.add("card-body");
+  var taskNameNode = document.createTextNode(taskName);
+  var closeButton = document.createElement("span");
+  closeButton.setAttribute("onclick", "rem(this)");
+  closeButton.className = " btn btn-light float-right btn-sm";
+  var closeText = document.createTextNode("X");
+  closeButton.appendChild(closeText);
+  taskTabBody.appendChild(taskNameNode);
+  taskTabBody.appendChild(closeButton);
+  taskTab.appendChild(taskTabBody);
+  taskTab.addEventListener("dragstart", dragStart);
+  taskTab.addEventListener("dragend", dragEnd);
+  card.appendChild(taskTab);
 }
 
-function rem(a){
-    var b = a.parentNode.parentNode.parentNode;
-    var c = a.parentNode.parentNode;
-    b.removeChild(c);
+function rem(a) {
+  console.log(a);
+  //selecting current dropzone
+  var current_Dropzone = a.parentNode.parentNode.parentNode;
+  //selecting current task
+  var currentTask = a.parentNode.parentNode;
+  //removing current task from current drop zone
+  current_Dropzone.removeChild(currentTask);
 }
 
-let fills = document.querySelectorAll('.fill');
-const empties = document.querySelectorAll('.empty');
-let a=0,f;
+//represents drop zones(Backlog, Inprogress, Approved, Done)
+const empties = document.querySelectorAll(".empty");
 
-
-// setInterval(function(){
-//     fills = document.querySelectorAll('.fill');
-//     for (const fill of fills) {
-//         fill.addEventListener('dragstart', dragStart);
-//         fill.addEventListener('dragend', dragEnd);
-//     }
-// },0);
-
-
+let isDraggedOver = 0,
+  currentDraggedNode;
 
 for (const empty of empties) {
-  empty.addEventListener('dragover', dragOver);
-  empty.addEventListener('dragleave', dragLeave);
-  empty.addEventListener('drop', dragDrop);
+  empty.addEventListener("dragover", dragOver);
+  empty.addEventListener("dragleave", dragLeave);
+  empty.addEventListener("drop", dragDrop);
 }
 
-
-
 function dragStart() {
-    this.className += ' hold';
-    setTimeout(() => (this.className = ' invisible'), 0);
-    f=this;
+  this.className += " hold";
+  setTimeout(() => (this.className = " invisible"), 0);
+  currentDraggedNode = this;
+  console.log("drag Start");
 }
 
 function dragEnd() {
-    this.className = ' card bg-primary text-white fill m-3';
-    f = this;
-
+  this.className = " card bg-primary text-white fill m-3";
+  currentDraggedNode = this;
+  console.log("drag End");
 }
 
 function dragOver(e) {
-    e.preventDefault();
-    if(a==0){
-        this.className += ' hovered';
-        a=1;
-    }
+  //this represents drop zone
+  // by default we will get stop symbol when dragged to drop zone
+  // to prevent this we use below line
+  e.preventDefault();
+  if (isDraggedOver == 0) {
+    this.className += " hovered";
+    isDraggedOver = 1;
+  }
+  console.log("drag Over");
 }
 
-
 function dragLeave() {
-    a=0;
-    this.className = ' card bg-light text-dark empty m-3';
+  //this represents drop zone
+  isDraggedOver = 0;
+  this.className = " card bg-light text-dark empty m-3";
+  console.log("drag Leave");
 }
 
 function dragDrop() {
-  this.className = ' card bg-light text-dark empty m-3';
-  
-  this.append(f);
+  //this represents drop zone
+  this.className = " card bg-light text-dark empty m-3";
+  this.append(currentDraggedNode);
+  console.log("drag Drop");
 }
